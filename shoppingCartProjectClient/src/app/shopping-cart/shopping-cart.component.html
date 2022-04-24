@@ -1,0 +1,63 @@
+<div *ngIf="products.length > 0; else noShoppingCart">
+  <h2>{{ "Shopping Cart" }}</h2>
+  <p>
+    {{ "You have "+totalItems+" items in your shopping cart." }}
+    <button class="btn btn-light" (click)="deleteCart()">
+      {{ "Clear shopping cart" }}
+    </button>
+  </p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">{{ "Product" }}</th>
+        <th scope="col">{{ "Quantity" }}</th>
+        <th scope="col">{{ "Price" }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td>
+          <div class="product-name">
+            <img [src]="p.img" >
+          {{ p.name }}
+
+          </div>
+        </td>
+        <td>
+          <div class="row text-center">
+            <div class="col-3">
+              <button
+                class="btn d-block btn-secondary"
+                (click)="removeFromCart(p)"
+              >
+                -
+              </button>
+            </div>
+            <div class="col">{{ p.quantity + " in cart" }}</div>
+            <div class="col-3">
+              <button class="btn d-block btn-secondary" (click)="addToCart(p)">
+                +
+              </button>
+            </div>
+          </div>
+        </td>
+        <td>{{ p.quantity * p.price | currency: "USD":true }}</td>
+      </tr>
+      <tr>
+        <th ></th>
+        <th ></th>
+        <th >{{ totalPrice |currency:'USD':true}}</th>
+      </tr>
+    </tbody>
+  </table>
+  <a class="btn btn-primary my-2" routerLink="/check-out">
+    {{ "Check Out" }}
+  </a>
+  <br>
+
+</div>
+<ng-template #noShoppingCart>
+  <div class="alert alert-danger">
+    {{ "There are no products in your shopping cart" }}
+  </div>
+</ng-template>

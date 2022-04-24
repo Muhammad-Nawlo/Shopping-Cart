@@ -1,0 +1,93 @@
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">{{ "Shopping Cart" }} </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/shopping-cart">{{
+            "Shopping Cart"
+          }}</a>
+        </li>
+        <li class="nav-item" *ngIf="!usersService.isLoggedIn()">
+          <a class="nav-link" routerLink="/login">{{
+            "Login"
+          }}</a>
+        </li>
+
+        <li  class="nav-item dropdown" ngbDropdown>
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            ngbDropdownToggle
+          >
+            {{ usersService.getUser()?.name }}
+          </a>
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="navbarDropdown"
+            ngbDropdownMenu
+          >
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/my-orders"
+                ngbDropdownItem
+                >{{ "My orders" }}</a
+              >
+            </li>
+            <ng-container *ngIf="usersService.getUser()?.isAdmin == 1">
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/admin-categories"
+                  ngbDropdownItem
+                  >{{ "Manage Categories" }}</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/admin-products"
+                  ngbDropdownItem
+                  >{{ "Manage Products" }}</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/admin-orders"
+                  ngbDropdownItem
+                  >{{ "Manage Orders" }}</a
+                >
+              </li>
+            </ng-container>
+            <li>
+              <a
+                class="dropdown-item"
+                (click)="usersService.logout()"
+                ngbDropdownItem
+                >{{ "Log out" }}</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,1 @@
+{"version":3,"file":"utility-config.service.d.ts","sources":["utility-config.service.d.ts"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;;AACA;;;AACA","sourcesContent":["/**\n * Utility config service holds all the global configurations of utility which can be overridden while\n * importing the module.\n */\nexport declare class UtilityConfigService {\n}\n"]}

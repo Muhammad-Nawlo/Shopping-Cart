@@ -1,0 +1,20 @@
+<h3 class="text-center my-3">{{ "New Category" }}</h3>
+<form #f="ngForm" (ngSubmit)="add(f)" >
+  <div class="mb-3">
+    <label for="name" class="form-label">{{ "Name" }}</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      [(ngModel)]="category.name"
+      required
+      name="name"
+      #name="ngModel"
+    />
+    <div *ngIf="name.invalid && name.touched">
+      {{ "The name of category is required" }}
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary " [disabled]="f.invalid">Save</button>
+  <button type="button" class="btn btn-danger mx-3" *ngIf="category.id" (click)="delete(category)">Delete</button>
+</form>

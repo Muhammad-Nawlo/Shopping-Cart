@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-3">
+    <div class="list-group position-sticky">
+      <a
+        [routerLink]="['/']"
+        [class.active]="!category"
+        class="list-group-item list-group-item-action"
+      >
+        {{ "All Categories" }}
+      </a>
+      <a
+        [routerLink]="['/']"
+        [queryParams]="{ category: c.id }"
+        routerLinkActive="{{ category == c.id }}"
+        [class.active]="category == c.id"
+        class="list-group-item list-group-item-action"
+        *ngFor="let c of categories"
+      >
+        {{ c.name }}
+      </a>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="d-flex align-items-stretch flex-wrap ">
+        <div class="card m-2 " *ngFor="let p of formatedProduct" >
+          <div class="img-container">
+            <img [src]="p.img" alt="{{ p.name }}" />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ p.name }}</h5>
+            <p class="card-text">{{ p.price | currency: "USD":true }}</p>
+          </div>
+          <div class="card-footer p-0">
+            <button
+              *ngIf="!p.quantity||p.quantity==0"
+              type="button"
+              class="btn btn-primary w-100"
+              (click)="addToCart(p)"
+            >
+              {{ "Add to shopping cart" }}
+            </button>
+            <div class="d-flex justify-content-between" *ngIf="p.quantity>0">
+              <div>
+                <button class="btn d-block btn-secondary" (click)="removeFromCart(p)">-</button>
+              </div>
+              <div>{{ p.quantity }}</div>
+              <div>
+                <button class="btn d-block btn-secondary" (click)="addToCart(p)">+</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

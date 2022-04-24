@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+.ng-data-table-pagination-range {
+  display: none !important;
+}
+
+.container{
+  max-width: 1200px;
+}
